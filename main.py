@@ -25,16 +25,21 @@ class TestAppium(unittest.TestCase):
 
     def test_voice_to_text(self):
         for file in files:
-            id = get_file_id(file)
-            wav_path = f"./wav-data/{file}"
-            connection.open_app()
-            wait = connection.wait()
-            click_element(START_XPATH, wait=wait, print_text="Recording start 🎬")
-            play_audio(wav_path)
-            time.sleep(WAIT_SECONDS)
-            click_element(INPUT_WIDGET_XPATH, wait=wait, print_text="Get Text_______")
-            text_regconation = get_text(INPUT_WIDGET_XPATH, wait=wait)
-            write_text(id, f"{id} {text_regconation}")
-            connection.terminate_app()
+            try:
+                id = get_file_id(file)
+                wav_path = f"./wav-data/{file}"
+                connection.open_app()
+                wait = connection.wait()
+                click_element(START_XPATH, wait=wait, print_text="Recording start 🎬")
+                play_audio(wav_path)
+                time.sleep(WAIT_SECONDS)
+                click_element(INPUT_WIDGET_XPATH, wait=wait, print_text="Get Text_______")
+            except Exception as error:
+                print(error)
+            else:
+                text_regconation = get_text(INPUT_WIDGET_XPATH, wait=wait)
+                write_text(id, f"{id} {text_regconation}")
+            finally:
+                connection.terminate_app()
 
 unittest.main()
