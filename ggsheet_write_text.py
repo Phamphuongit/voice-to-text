@@ -6,9 +6,9 @@ creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", sco
 client = gspread.authorize(creds)
 
 spreadsheet = client.open("voice-to-text")
-worksheet = spreadsheet.worksheet("Voice1")  # ví dụ "Trang tính1"
+worksheet = spreadsheet.worksheet("Voice1")
 
 def write_text(id, text):
     cell = worksheet.find(id)
-    worksheet.update(f"C{cell.row}", [[text]])
-    print("Overwriting_____________")
+    worksheet.update(f"D{cell.row}", [[text]])
+    print(f"Overwriting {text} 📝📝📝📝📝📝📝📝📝📝📝📝📝📝📝📝📝📝📝📝")
